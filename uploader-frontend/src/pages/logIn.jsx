@@ -5,9 +5,10 @@ import { useState, useEffect } from 'react';
 import { IconEye, IconEyeInvisible } from '../components/icons';
 
 import { useAuthContext } from '../hooks/use-auth-context';
+import { ButtonLoader } from '../components/button-loader';
 
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Login = () => {
     const { dispatch } = useAuthContext();
@@ -35,14 +36,14 @@ export const Login = () => {
             if (res.ok) {
                 console.log('login Response Success', data);
                 dispatch({ type: 'LOGIN', payload: data.user });
-                // toast.success("Logged in successfully !")
+                toast.success("Logged in successfully !")
                 localStorage.setItem('jwt', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
                 // navigate('/');
             }
             if (data.error !== null) {
                 setLoginError(data.error);
-                // toast.error(data.error);
+                toast.error(data.error);
                 console.log("Error recieved", data);
                 return;
             }
@@ -50,7 +51,7 @@ export const Login = () => {
         }
         catch (err) {
             console.log(err);
-            // toast.error("Sorry, please try again")
+            toast.error("Sorry, please try again")
         }
         finally{
             setLoading(false);
@@ -63,7 +64,7 @@ export const Login = () => {
     })
     return (
         <div className='mt-20 mx-auto w-[80vw] p-8 px-5 sm:p-8 flex items-center justify-center flex-col gap-y-5 border rounded-md shadow-md bg-white'>
-            {/* <ToastContainer /> */}
+            <ToastContainer />
             <h1 className='text-2xl font-bold'>
                 LOG IN
             </h1>
@@ -80,16 +81,12 @@ export const Login = () => {
                         <IconEyeInvisible className='absolute top-1/2 right-0 text-zinc-500 cursor-pointer text-lg'/>}</span>
                 </div>
                 <button type='submit' disabled={loading} className=' mt-4 bg-indigo-700 text-white text-md rounded-sm p-2 px-6 hover:bg-indigo-900'>
-                    {/* {loading ? <ButtonLoader /> : "Log In"} */}
-                    log-in
+                    {loading ? <ButtonLoader/> : "Log-In"}
                 </button>
             </form>
             <p>
                 Not an existing user ? <Link to="/auth/sign-up" className='text-purple-600'>Sign-Up</Link>
             </p>
-            {/* <p>
-                Can't remember your password ? <Link to="/forgotpassword" className='text-purple-600'>Forgot Password</Link>
-            </p> */}
         </div>
     )
 }

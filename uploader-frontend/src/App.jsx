@@ -3,7 +3,9 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Navigate
+  Navigate,
+  Link,
+  useNavigate
 } from "react-router-dom";
 
 import { SignUp } from './pages/signUp.jsx';
@@ -12,16 +14,19 @@ import { Uploader } from './pages/uploader.jsx';
 import Dashboard from './pages/dashboard.jsx';
 import { useAuthContext } from "./hooks/use-auth-context.jsx";
 import Home from "./pages/home.jsx";
+import Navbar from "./components/navbar.jsx";
 
 
 function App() {
 
-  const { user } = useAuthContext();
+  const { user, dispatch } = useAuthContext();
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden bg-white">
+
       <div>
         <BrowserRouter>
+            <Navbar/>
           <Routes>
             <Route
               path='/'

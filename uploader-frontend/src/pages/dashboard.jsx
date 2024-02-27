@@ -13,6 +13,7 @@ const Dashboard = () => {
     const [searchParam, setSearchParam] = useState(""); 
     const [filteredImages, setFilteredImages] = useState([]);
     const [openUploadModal, setOpenUploadModal] = useState(false);
+    const [uploadTick, setUploadTick] = useState(false);
 
     useEffect(() => {
         const getImages = async () => {
@@ -37,7 +38,7 @@ const Dashboard = () => {
 
         }
         getImages();
-    }, [user])
+    }, [user, uploadTick])
 
     const HandleFilterSearch = (e) => {
         setSearchParam(e.target.value);
@@ -56,8 +57,13 @@ const Dashboard = () => {
                 </Link>
             </div>
             :
-            <div className='min-h-screen w-full pt-10 px-5 sm:px-[10vw]'>
-                {openUploadModal && <Uploader openModal={setOpenUploadModal}/>}
+            <div className='min-h-screen w-full pt-4 px-5 sm:px-[10vw]'>
+                {openUploadModal && (
+                    <Uploader 
+                        openModal={setOpenUploadModal} 
+                        uploadTick={uploadTick} 
+                        setUploadTick={setUploadTick}
+                    />)}
                 <div className='flex flex-col'>
                     <h1 className='font-bold w-full py-4 text-4xl text-zinc-800 border-b-2'>
                         Hi, {user?.name}

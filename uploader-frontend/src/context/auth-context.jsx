@@ -23,9 +23,10 @@ export const AuthContextProvider = ({children})=>{
             try{
                 const token = localStorage.getItem('jwt');
                 
-                // if(token){
-                //     dispatch({type: "LOGIN", payload:})
-                // }
+                if(!token){
+                    // dispatch({type: "LOGIN", payload:})
+                    return;
+                }
                 
                 const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/auth/check-user/${token}`);
                 const data = await response.json();

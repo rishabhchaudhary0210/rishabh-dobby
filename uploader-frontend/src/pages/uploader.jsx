@@ -3,23 +3,29 @@ import { useAuthContext } from "../hooks/use-auth-context";
 import { useNavigate } from "react-router-dom";
 
 import { Link } from 'react-router-dom';
+import { ButtonLoader } from "../components/button-loader";
 
-export const Uploader = ({openModal}) => {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+export const Uploader = ({ openModal, uploadTick, setUploadTick }) => {
 
     const { user, dispatch } = useAuthContext();
     const [imageUrl, setImageUrl] = useState("");
     const [newUpload, setNewUpload] = useState({
         name: "",
         imageUrl: "",
-    })
+    });
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const fileInputRef = useRef();
     const uploadModalRef = useRef(null);
 
     const handleSubmit = async (e) => {
+        setLoading(true);
         e.preventDefault();
         try {
-            if(newUpload.name === "" || newUpload.imageUrl === ""){
+            if (newUpload.name === "" || newUpload.imageUrl === "") {
                 return;
             }
             const formData = new FormData();
@@ -37,16 +43,19 @@ export const Uploader = ({openModal}) => {
 
             if (!response.ok) {
                 console.log("Error", data);
+                toast.error(data.error);
             }
             else {
+                setUploadTick(!uploadTick);
                 console.log("Success", data);
             }
         }
         catch (error) {
             console.log(error);
         }
-        finally{
+        finally {
             openModal(false);
+            setLoading(false);
         }
 
         console.log("From Submitted");
@@ -60,8 +69,8 @@ export const Uploader = ({openModal}) => {
     }
 
     const onClickReset = () => {
-        if(fileInputRef.current){
-            fileInputRef.current.value="";
+        if (fileInputRef.current) {
+            fileInputRef.current.value = "";
         }
         setNewUpload({
             ...newUpload, imageUrl: ""
@@ -92,6 +101,7 @@ export const Uploader = ({openModal}) => {
                 ref={uploadModalRef}
                 className="border-2 w-[85vw] sm:w-96 py-10 px-4 flex flex-col items-center justify-center rounded-md shadow-md fixed -translate-x-2/4 -translate-y-2/4 left-2/4 top-2/4 z-20 bg-white"
             >
+                <ToastContainer />
                 <h1 className='text-2xl font-bold'>
                     Upload Image
                 </h1>
@@ -128,8 +138,8 @@ export const Uploader = ({openModal}) => {
                             value={newUpload.name}
                         />
                     </div>
-                    <button type="submit" className=' mt-4 bg-indigo-700 text-white text-md rounded-md p-2 px-6 hover:bg-indigo-900'>
-                        Upload
+                    <button type="submit" disabled={loading} className=' mt-4 bg-indigo-700 text-white text-md rounded-md p-2 px-6 hover:bg-indigo-900'>
+                        {loading ? <ButtonLoader /> : "Upload"}
                     </button>
                 </form>
             </div>

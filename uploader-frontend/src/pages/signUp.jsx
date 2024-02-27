@@ -5,9 +5,10 @@ import { useRef, useState, useEffect } from 'react';
 import { IconEye, IconEyeInvisible } from '../components/icons';
 
 import { useAuthContext } from '../hooks/use-auth-context';
+import { ButtonLoader } from '../components/button-loader';
 
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const SignUp = () => {
     const { dispatch } = useAuthContext();
@@ -15,6 +16,8 @@ export const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [signupError, setSingupError] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     const HandleUserSignUp = async (e) => {
         e.preventDefault();
@@ -37,14 +40,14 @@ export const SignUp = () => {
             if (res.ok) {
                 console.log('Signup success', data);
                 dispatch({ type: 'LOGIN', payload: data.user });
-                // toast.success("Sign-up Successful !");
+                toast.success("Sign-up Successful !");
                 localStorage.setItem('jwt', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
-                // navigate('/');
+                navigate('/');
             }
             if (data.error !== null) {
                 setSingupError(data.error);
-                // toast.error(data.error);
+                toast.error(data.error);
                 console.log("Error recieved", data);
                 return;
             }
@@ -52,7 +55,7 @@ export const SignUp = () => {
         }
         catch(err){
             console.log(err);
-            // toast.error("Sorry, please try again")
+            toast.error("Sorry, please try again")
         }
         finally{
             setLoading(false);
@@ -65,7 +68,7 @@ export const SignUp = () => {
     
     return (
         <div className='mt-20 mx-auto w-[80vw] p-8 px-5 sm:p-8 flex items-center justify-center flex-col gap-y-5 border rounded-md shadow-md bg-white'>
-            {/* <ToastContainer /> */}
+            <ToastContainer />
             <h1 className='text-2xl font-bold'>
                 SIGN UP
             </h1>
@@ -89,9 +92,8 @@ export const SignUp = () => {
                         ? <IconEye className='absolute top-1/2 right-0 text-zinc-500 cursor-pointer text-lg'/> :
                         <IconEyeInvisible className='absolute top-1/2 right-0 text-zinc-500 cursor-pointer text-lg'/>}</span>
                 </div>
-                <button type='submit' className=' mt-4 bg-indigo-700 text-white text-md rounded-sm p-2 px-6 hover:bg-indigo-900'> 
-                    {/* {loading ? <ButtonLoader/>: "Sign Up"}  */}
-                    Sign-Up
+                <button type='submit' disabled={loading} className=' mt-4 bg-indigo-700 text-white text-md rounded-sm p-2 px-6 hover:bg-indigo-900'> 
+                    {loading ? <ButtonLoader/> : "Sign-Up"}
                 </button>
             </form>
             <p>
