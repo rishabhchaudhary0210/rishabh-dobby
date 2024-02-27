@@ -16,35 +16,37 @@ import Home from "./pages/home.jsx";
 
 function App() {
 
-  const {  user } = useAuthContext();
+  const { user } = useAuthContext();
 
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path='/'
-            element={<Home />}
-          />
-          <Route
-            path='/auth/sign-up'
-            element={!user ? <SignUp /> : <Navigate to='/'/>}
-          />
-          <Route
-            path='/auth/log-in'
-            element={!user ? <Login /> : <Navigate to='/'/>}
-          />
-          <Route
-            path='/upload'
-            element={<Uploader />}
-          />
-          <Route
-            path='/user-display'
-            element={<Dashboard />}
-          />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <div className="min-h-screen overflow-x-hidden">
+      <div>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path='/'
+              element={<Home />}
+            />
+            <Route
+              path='/auth/sign-up'
+              element={!user ? <SignUp /> : <Navigate to='/' />}
+            />
+            <Route
+              path='/auth/log-in'
+              element={!user ? <Login /> : <Navigate to='/' />}
+            />
+            <Route
+              path='/upload'
+              element={<Uploader />}
+            />
+            <Route
+              path='/user-display'
+              element={<Dashboard />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </div>
   )
 }
 

@@ -62,32 +62,34 @@ export const Login = () => {
         window.scrollTo(0, 0);
     })
     return (
-        <div className='login-form-container'>
+        <div className='mt-20 mx-auto w-[80vw] p-8 px-5 sm:p-8 flex items-center justify-center flex-col gap-y-5 border rounded-md shadow-md bg-white'>
             {/* <ToastContainer /> */}
-            <h1>LOG IN</h1>
-            <form onSubmit={HandleUserLogIn} action="" method='POST'>
-                <div className='form-input'>
-                    <input type='email' id="email" name='email' placeholder="Enter Your Email-ID" />
+            <h1 className='text-2xl font-bold'>
+                LOG IN
+            </h1>
+            <form onSubmit={HandleUserLogIn} action="" method='POST' className='gap-y-2 w-full sm:mt-5 flex flex-col items-center'>
+                <div className='relative my-2 h-full w-full flex flex-col '>
                     <label htmlFor="email">Email</label>
+                    <input type='email' id="email" name='email' placeholder="Enter Your Email-ID" className='border-b-2 border-zinc-400 placeholder:text-sm outline-none w-full focus:border-indigo-700 p-2'/>
                 </div>
-                <div className='form-input password'>
-                    <input type={!showPassword ? 'password' : 'text'} name="password" id="password" required placeholder='Enter Your Password' />
+                <div className='relative my-2 h-full w-full flex flex-col '>
                     <label htmlFor="password">Password</label>
+                    <input type={!showPassword ? 'password' : 'text'} name="password" id="password" required placeholder='Enter Your Password' className='border-b-2 border-zinc-400 placeholder:text-sm outline-none w-full focus:border-indigo-700 p-2' />
                     <span onClick={() => setShowPassword(!showPassword)}>{showPassword
-                        ? <IconEye /> :
-                        <IconEyeInvisible />}</span>
+                        ? <IconEye className='absolute top-1/2 right-0 text-zinc-500 cursor-pointer text-lg'/> :
+                        <IconEyeInvisible className='absolute top-1/2 right-0 text-zinc-500 cursor-pointer text-lg'/>}</span>
                 </div>
-                <button type='submit' disabled={loading} className='login-btn'>
+                <button type='submit' disabled={loading} className=' mt-4 bg-indigo-700 text-white text-md rounded-sm p-2 px-6 hover:bg-indigo-900'>
                     {/* {loading ? <ButtonLoader /> : "Log In"} */}
                     log-in
                 </button>
             </form>
             <p>
-                Not an existing user ? <Link to="/auth/sign-up">Sign-Up</Link>
+                Not an existing user ? <Link to="/auth/sign-up" className='text-purple-600'>Sign-Up</Link>
             </p>
-            <p>
-                Can't remember your password ? <Link to="/forgotpassword">Forgot Password</Link>
-            </p>
+            {/* <p>
+                Can't remember your password ? <Link to="/forgotpassword" className='text-purple-600'>Forgot Password</Link>
+            </p> */}
         </div>
     )
 }

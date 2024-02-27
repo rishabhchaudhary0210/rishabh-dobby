@@ -15,18 +15,7 @@ export const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [signupError, setSingupError] = useState('');
     const [loading, setLoading] = useState(false);
-    // const navigate = useNavigate();
 
-    // const HandlePhoneFocusIn = () => {
-    //     phoneLabel.current.style.top = '-18px';
-    //     phoneLabel.current.style.left = '0px';
-    // }
-    // const HandlePhoneFocusOut = (e) => {
-    //     if (e.target.value.length === 0) {
-    //         phoneLabel.current.style.top = '12px';
-    //         phoneLabel.current.style.left = '50px';
-    //     }
-    // }
     const HandleUserSignUp = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -73,42 +62,40 @@ export const SignUp = () => {
     useEffect(()=>{
         window.scrollTo(0,0);
     })
+    
     return (
-        <div className='login-form-container'>
+        <div className='mt-20 mx-auto w-[80vw] p-8 px-5 sm:p-8 flex items-center justify-center flex-col gap-y-5 border rounded-md shadow-md bg-white'>
             {/* <ToastContainer /> */}
-            <h1>SIGN UP</h1>
-            <form onSubmit={HandleUserSignUp} method='POST'>
-                <div className='form-input'>
-                    <input type="text" id="name" name='name' required placeholder="Enter Your Name" />
-                    <label htmlFor="name">Name</label>
+            <h1 className='text-2xl font-bold'>
+                SIGN UP
+            </h1>
+            <form onSubmit={HandleUserSignUp} method='POST' className='gap-y-2 w-full sm:mt-5 flex flex-col items-center'>
+                <div className='relative my-2 h-full w-full flex flex-col '>
+                    <label htmlFor="name" className=''>Name</label>
+                    <input type="text" id="name" name='name' required placeholder="Enter Your Name" 
+                        className='border-b-2 border-zinc-400 placeholder:text-sm outline-none w-full focus:border-indigo-700 p-2 '
+                    />
                 </div>
-                <div className='form-input'>
-                    <input type='email' id="email" name='email' required placeholder="Enter Your Email-ID" />
-                    <label htmlFor="email">Email</label>
+                <div className='relative my-2 h-full w-full flex flex-col '>
+                    <label htmlFor="email" className=''>Email</label>
+                    <input type='email' id="email" name='email' required placeholder="Enter Your Email-ID" 
+                        className='border-b-2 border-zinc-400 placeholder:text-sm outline-none w-full focus:border-indigo-700 h-8 p-2'
+                    />
                 </div>
-                <div className='form-input'>
-                    {/* <PhoneInput
-                        country={''}
-                        placeholder={"Enter Your Contact No"}
-                        inputProps={{ name: 'phone', id: "phone-input", required: true }}
-                        onFocus={HandlePhoneFocusIn} onBlur={HandlePhoneFocusOut}
-                    /> */}
-                    <label ref={phoneLabel} htmlFor="phone-input" id='phone-label'>Contact No</label>
-                </div>
-                <div className='form-input password'>
-                    <input type={!showPassword ? 'password' : 'text'} name="password" id="password" required placeholder='Enter Your Password' />
-                    <label htmlFor="password">Password</label>
+                <div className='relative my-2 h-full w-full flex flex-col '>
+                    <label htmlFor="password" className=''>Password</label>
+                    <input type={!showPassword ? 'password' : 'text'} name="password" id="password" required placeholder='Enter Your Password' className='border-b-2 border-zinc-400 placeholder:text-sm outline-none w-full focus:border-indigo-700 h-8 p-2' />
                     <span onClick={() => setShowPassword(!showPassword)}>{showPassword
-                        ? <IconEye /> :
-                        <IconEyeInvisible />}</span>
+                        ? <IconEye className='absolute top-1/2 right-0 text-zinc-500 cursor-pointer text-lg'/> :
+                        <IconEyeInvisible className='absolute top-1/2 right-0 text-zinc-500 cursor-pointer text-lg'/>}</span>
                 </div>
-                <button type='submit' className='login-btn'> 
+                <button type='submit' className=' mt-4 bg-indigo-700 text-white text-md rounded-sm p-2 px-6 hover:bg-indigo-900'> 
                     {/* {loading ? <ButtonLoader/>: "Sign Up"}  */}
                     Sign-Up
                 </button>
             </form>
             <p>
-                Already registered ? <Link to="/auth/log-in">Log-In</Link>
+                Already registered ? <Link to="/auth/log-in" className='text-purple-600'>Log-In</Link>
             </p>
         </div>
     )
