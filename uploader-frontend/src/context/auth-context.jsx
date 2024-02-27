@@ -32,7 +32,6 @@ export const AuthContextProvider = ({children})=>{
                 const data = await response.json();
                 
                 if(response.ok){
-                    console.log("Logged-in Successfuly from auth context", data)
                     dispatch({type:'LOGIN', payload:data.user});
                 }
             }

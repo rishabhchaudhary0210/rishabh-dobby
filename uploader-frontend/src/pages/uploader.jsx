@@ -43,12 +43,10 @@ export const Uploader = ({ openModal, uploadTick, setUploadTick }) => {
             const data = await response.json();
 
             if (!response.ok) {
-                console.log("Error", data);
                 toast.error(data.error);
             }
             else {
                 setUploadTick(!uploadTick);
-                console.log("Success", data);
             }
         }
         catch (error) {
@@ -58,8 +56,6 @@ export const Uploader = ({ openModal, uploadTick, setUploadTick }) => {
             openModal(false);
             setLoading(false);
         }
-
-        console.log("From Submitted");
     }
 
     const handleOnChange = (e) => {

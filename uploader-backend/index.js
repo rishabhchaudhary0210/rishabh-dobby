@@ -17,6 +17,9 @@ app.use(cors());
 
 app.use(express.json());
 
+app.get("/", (req, res)=>{
+    res.json({success : "Server started sucessfully."});
+})
 
 //user auth routes
 app.use("/auth", require("./routes/auth"));

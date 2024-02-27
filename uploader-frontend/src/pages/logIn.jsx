@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-// import './StyleSheet/signup.css';
 import { useState, useEffect } from 'react';
 
 import { IconEye, IconEyeInvisible } from '../components/icons';
@@ -15,7 +14,8 @@ export const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [loginError, setLoginError] = useState('');
     const [loading, setLoading] = useState(false);
-    // const navigate = useNavigate();
+
+    const navigate = useNavigate();
 
     const HandleUserLogIn = async (e) => {
         e.preventDefault();
@@ -34,7 +34,6 @@ export const Login = () => {
             })
             const data = await res.json();
             if (res.ok) {
-                console.log('login Response Success', data);
                 dispatch({ type: 'LOGIN', payload: data.user });
                 toast.success("Logged in successfully !")
                 localStorage.setItem('jwt', data.token);
@@ -44,10 +43,8 @@ export const Login = () => {
             if (data.error !== null) {
                 setLoginError(data.error);
                 toast.error(data.error);
-                console.log("Error recieved", data);
                 return;
             }
-            console.log(user);
         }
         catch (err) {
             console.log(err);
@@ -63,7 +60,7 @@ export const Login = () => {
         window.scrollTo(0, 0);
     })
     return (
-        <div className='mt-20 mx-auto w-[80vw] p-8 px-5 sm:p-8 flex items-center justify-center flex-col gap-y-5 border rounded-md shadow-md bg-white'>
+        <div className='mt-14 mx-auto w-[80vw] p-8 px-5 sm:p-8 flex items-center justify-center flex-col gap-y-5 border rounded-md shadow-md bg-white'>
             <ToastContainer />
             <h1 className='text-2xl font-bold'>
                 LOG IN

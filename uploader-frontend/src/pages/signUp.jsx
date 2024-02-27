@@ -38,7 +38,6 @@ export const SignUp = () => {
             })
             const data = await res.json();
             if (res.ok) {
-                console.log('Signup success', data);
                 dispatch({ type: 'LOGIN', payload: data.user });
                 toast.success("Sign-up Successful !");
                 localStorage.setItem('jwt', data.token);
@@ -48,10 +47,8 @@ export const SignUp = () => {
             if (data.error !== null) {
                 setSingupError(data.error);
                 toast.error(data.error);
-                console.log("Error recieved", data);
                 return;
             }
-            console.log(user);
         }
         catch(err){
             console.log(err);
@@ -67,7 +64,7 @@ export const SignUp = () => {
     })
     
     return (
-        <div className='mt-20 mx-auto w-[80vw] p-8 px-5 sm:p-8 flex items-center justify-center flex-col gap-y-5 border rounded-md shadow-md bg-white'>
+        <div className='mt-14 mx-auto w-[80vw] p-8 px-5 sm:p-8 flex items-center justify-center flex-col gap-y-5 border rounded-md shadow-md bg-white'>
             <ToastContainer />
             <h1 className='text-2xl font-bold'>
                 SIGN UP
