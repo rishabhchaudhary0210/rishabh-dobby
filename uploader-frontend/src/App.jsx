@@ -40,12 +40,12 @@ function App() {
               path='/auth/log-in'
               element={!user ? <Login /> : <Navigate to='/' />}
             />
-            <Route
+            {/* <Route
               path='/upload'
               element={<Uploader />}
-            />
+            /> */}
             <Route
-              path='/user-display'
+              path='/user-library'
               element={<Dashboard />}
             />
           </Routes>

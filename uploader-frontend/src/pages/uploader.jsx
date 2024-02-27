@@ -26,6 +26,7 @@ export const Uploader = ({ openModal, uploadTick, setUploadTick }) => {
         e.preventDefault();
         try {
             if (newUpload.name === "" || newUpload.imageUrl === "") {
+                toast.error("One or more fields empty.")
                 return;
             }
             const formData = new FormData();
@@ -118,6 +119,7 @@ export const Uploader = ({ openModal, uploadTick, setUploadTick }) => {
                     <div className="w-full">
                         <input
                             ref={fileInputRef}
+                            required
                             type="file"
                             accept=".png, .jpg, .jpeg"
                             name="image"
@@ -130,6 +132,7 @@ export const Uploader = ({ openModal, uploadTick, setUploadTick }) => {
                     <div className="w-full">
                         <input
                             type="text"
+                            required
                             name="name"
                             id="name"
                             className="h-10 w-full my-5 p-2 outline-none focus:border-b-2 border-zinc-500 bg-zinc-200 rounded-md text-md"

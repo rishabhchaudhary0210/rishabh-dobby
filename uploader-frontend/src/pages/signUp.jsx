@@ -43,7 +43,7 @@ export const SignUp = () => {
                 toast.success("Sign-up Successful !");
                 localStorage.setItem('jwt', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
-                navigate('/');
+                navigate('/user-library');
             }
             if (data.error !== null) {
                 setSingupError(data.error);

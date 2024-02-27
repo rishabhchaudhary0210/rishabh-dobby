@@ -39,7 +39,7 @@ export const Login = () => {
                 toast.success("Logged in successfully !")
                 localStorage.setItem('jwt', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
-                // navigate('/');
+                navigate('/user-library');
             }
             if (data.error !== null) {
                 setLoginError(data.error);
